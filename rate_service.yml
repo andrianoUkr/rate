@@ -1,0 +1,28 @@
+
+version: '2'
+services:
+    rate_service:
+        restart: always
+        image: node:16.16.0
+        # link a local folder to a container folder
+        volumes:
+            - ./:/home/node/front-project
+        # use port for current project
+        ports:
+            - 8080:7000
+        # links: 
+        #     - tht_myAccount
+        container_name: rate_service
+        # working directory path in the container
+        working_dir: /home/node/front-project
+        # use command to run
+        command:
+            - /bin/bash
+            - -c
+            - |
+                echo YARN INSTALL
+                yarn
+                echo YARN START
+                yarn dev
+        # use command in console bash
+        # docker-compose -f rate_service.yml up -d
